@@ -37,3 +37,23 @@ var greetDeeplyCurried = function(greeting) {
 };
 
 greetDeeplyCurried(greeting)(separator)(emphasis)(name);
+
+
+var greetDeeplyCurried2 = function(greeting) {
+    return function(separator) {
+      return function(emphasis) {
+        return function(name) {
+          console.log(greeting + separator + name + emphasis);
+        };
+      };
+    };
+  };
+  
+  var greetAwkwardly = greetDeeplyCurried2("Hello")("...")("?");
+  greetAwkwardly("Heidi");
+  
+  var sayHello = greetDeeplyCurried2("Hello")(", ");
+  sayHello(".")("Heidi");
+  
+  var askHello = sayHello("?");
+  askHello("Heidi");
