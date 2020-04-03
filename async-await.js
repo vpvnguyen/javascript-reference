@@ -1,22 +1,31 @@
 console.log("Start");
-// example of promise
 
-const promise = new Promise((resolve, reject) => {
+const login = (username, password) =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ username, password });
+    }, 2000);
+  });
+
+const data = new Promise((resolve, reject) => {
   setTimeout(() => {
-    console.log("setTimeout complete");
+    resolve({ data: "Data" });
   }, 2000);
 });
 
-const login = (email, password) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log("Logging in...");
-      resolve({ email, password });
-    }, 2000);
-  });
+const data2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve({ data: "Data2" });
+  }, 2000);
+});
+
+const displayDataAsync = async () => {
+  const loginUser = await login("vpvnguyen", 12345);
+  const displayData = await data;
+  const displayData2 = await data2;
+  console.log(loginUser, displayData, displayData2);
 };
 
-promise.then(result => console.log(result)); // setTimeout complete
-login("vpvnguyen", 123456).then(user => console.log(user.email, user.password)); // Logging in... // vpvnguyen 123456
+displayDataAsync();
 
 console.log("End");
