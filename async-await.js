@@ -19,13 +19,13 @@ const data2 = new Promise((resolve, reject) => {
   }, 2000);
 });
 
-const displayDataAsync = async () => {
-  const loginUser = await login("vpvnguyen", 12345);
+const displayDataAsync = async (username, password) => {
+  const loginUser = await login(username, password);
   const displayData = await data;
   const displayData2 = await data2;
   console.log(loginUser, displayData, displayData2);
 };
 
-displayDataAsync();
+displayDataAsync("vpvnguyen", 12345);
 
 console.log("End");
