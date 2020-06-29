@@ -9,6 +9,21 @@ const activities = [
   { title: "I am at the bottom", date: new Date("1988-11-21") },
 ];
 
+let dates = [
+  {
+    name: "b",
+    date: new Date("2020-05-30T20:21:31Z"),
+  },
+  {
+    name: "c",
+    date: new Date("2020-06-28T23:38:32Z"),
+  },
+  {
+    name: "a",
+    date: new Date("1988-06-28T23:38:32Z"),
+  },
+];
+
 // new Date creates a new Date object that you can modify or initialize with a different date
 // while Date returns a string of the current date/time, ignoring its arguments.
 
@@ -22,7 +37,9 @@ const activities2 = [
 ];
 
 const sortedActivities = activities.sort((a, b) => b.date - a.date);
+const sortDate = dates.sort((a, b) => b.date - a.date);
 const sortedActivities2 = activities2.sort((a, b) => b.date - a.date);
 
 console.log(sortedActivities);
+console.log(sortDate);
 console.log(sortedActivities2);
