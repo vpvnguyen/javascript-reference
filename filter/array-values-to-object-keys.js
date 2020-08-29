@@ -1,8 +1,10 @@
 const array = ["javascript", "html", "css"];
 const array2 = ["php", "python"];
 const array3 = ["javascript", "html", "scss"];
+const badArray = ["javascript", "yo"];
 
 const languages = {
+  default: "#cccccc",
   html: "#fff4e6",
   css: "#1c7ed6",
   scss: "#1c7ed6",
@@ -19,6 +21,7 @@ const getKeyFromArray = (array) => {
 
   const languageColors = array.map((value, index) => {
     if (key.includes(value)) return { [array[index]]: languages[value] };
+    return { [array[index]]: languages.default };
     // javascript #fff3bf
     // html #fff4e6
     // css #1c7ed6
