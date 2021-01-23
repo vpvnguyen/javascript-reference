@@ -43,6 +43,10 @@ const checkObjectKeys = (theme, defaultTheme) => {
   return Object.keys(theme).includes(Object.keys(defaultTheme));
 };
 
+const mapKeys = () => {
+  Object.entries(theme).map((value) => console.log(value));
+};
+
 const createTheme = (theme, defaultTheme) => {
   const themeKeys = Object.keys(theme);
   const defaultThemeKeys = Object.keys(defaultTheme);
@@ -54,4 +58,5 @@ const createTheme = (theme, defaultTheme) => {
   console.log(objectKeys);
 };
 
-createTheme(theme, defaultTheme);
+// createTheme(theme, defaultTheme);
+mapKeys();
