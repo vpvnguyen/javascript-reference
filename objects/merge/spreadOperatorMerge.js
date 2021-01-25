@@ -1,4 +1,4 @@
-const object1 = {
+const defaultObject = {
   prop1: "prop1-DEFAULT",
   prop2: {
     name2: "prop2-DEFAULT",
@@ -12,44 +12,59 @@ const object1 = {
     name4: "prop4-DEFAULT",
     desc4: "prop4-DEFAULT",
   },
+  prop5: "prop5-DEFAULT",
+  prop6: 6,
+  prop7: "7",
 };
 
-const object2 = {
+const objectWithNewProperties = {
   prop1: "prop1-NEW",
-  prop2: {
-    name2: "prop2-NEW",
-  },
+  prop2: undefined,
   prop3: {
-    desc3: "prop3-NEW",
+    name3: "prop3-NEW",
   },
+  prop4: {
+    desc4: "prop4-NEW",
+  },
+  prop5: {
+    name5: "prop5-NEW",
+  },
+  prop6: {
+    number: 6,
+  },
+  prop7: 7,
 };
-
-const mergeObjects = (targetObject, sourceObject) => ({
-  ...targetObject,
-  ...sourceObject,
-});
 
 const mergeObjectsFirstChildren = (targetObject, sourceObject) => {
   const targetEntries = Object.entries(targetObject);
 
   targetEntries.map(([targetKey, targetValue]) => {
-    if (typeof targetValue === "object") {
+    if (
+      typeof targetObject[targetKey] &&
+      typeof sourceObject[targetKey] === "string"
+    ) {
+      targetObject[targetKey] = sourceObject[targetKey];
+    }
+
+    if (
+      typeof targetObject[targetKey] &&
+      typeof sourceObject[targetKey] !== "string" &&
+      typeof targetObject[targetKey] === typeof sourceObject[targetKey]
+    ) {
       targetObject[targetKey] = {
         ...targetValue,
         ...sourceObject[targetKey],
       };
-    } else {
-      targetObject[targetKey] = sourceObject[targetKey];
     }
+
+    targetObject[targetKey] = targetObject[targetKey];
   });
 
   return targetObject;
 };
 
-const mergedObject = mergeObjects(object1, object2);
-console.log("mergedObject: ", mergedObject);
-const mergedObjectsFirstChildren = mergeObjectsFirstChildren(
-  object1,
-  mergedObject
+const mergedParentObject = mergeObjectsFirstChildren(
+  defaultObject,
+  objectWithNewProperties
 );
-console.log("mergedObjectsFirstChildren: ", mergedObjectsFirstChildren);
+console.log("mergedParentObject: ", mergedParentObject);
