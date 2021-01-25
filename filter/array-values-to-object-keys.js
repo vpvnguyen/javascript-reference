@@ -2,6 +2,7 @@ const array = ["javascript", "html", "css"];
 const array2 = ["php", "python"];
 const array3 = ["javascript", "html", "scss"];
 const badArray = ["javascript", "yo"];
+const { performance } = require("perf_hooks");
 
 const languages = {
   default: "#cccccc",
@@ -29,5 +30,7 @@ const getKeyFromArray = (array) => {
 
   console.log(languageColors); // [ { javascript: '#fff3bf' }, { html: '#fff4e6' }, { css: '#1c7ed6' } ]
 };
-
+const t0 = performance.now();
 getKeyFromArray(array);
+const t1 = performance.now();
+console.log(t1 - t0);
