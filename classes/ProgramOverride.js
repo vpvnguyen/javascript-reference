@@ -5,7 +5,7 @@
  * Construct program override options based on given key
  * */
 
-class ConstructProgramOverride {
+class ProgramOverride {
   allProgramOverrideOptions = {
     default: {},
     custom1: {
@@ -35,7 +35,7 @@ class ConstructProgramOverride {
       this.message = programOverrideOptions.message || null;
       this.amount = programOverrideOptions.amount || null;
     } catch (error) {
-      console.warn("ConstructProgramOverride constructor error:", error);
+      console.warn("ProgramOverride constructor error:", error);
     }
   }
 
@@ -53,40 +53,40 @@ class ConstructProgramOverride {
  * Use property if it exists
  * */
 
-const ProgramOverride = new ConstructProgramOverride("custom1");
+const OverrideProgram = new ProgramOverride("custom1");
 
 console.log(
   `
 override name?`,
-  ProgramOverride.getName()
+  OverrideProgram.getName()
 );
-if (ProgramOverride.getName()) {
+if (OverrideProgram.getName()) {
   console.log("OVERRIDE");
 }
 
 console.log(
   `
 override description?`,
-  ProgramOverride.getDescription()
+  OverrideProgram.getDescription()
 );
-if (ProgramOverride.getDescription()) {
+if (OverrideProgram.getDescription()) {
   console.log("OVERRIDE");
 }
 
 console.log(
   `
 override message?`,
-  ProgramOverride.getMessage()
+  OverrideProgram.getMessage()
 );
-if (ProgramOverride.getMessage()) {
+if (OverrideProgram.getMessage()) {
   console.log("OVERRIDE");
 }
 
 console.log(
   `
 override amount?`,
-  ProgramOverride.getAmount()
+  OverrideProgram.getAmount()
 );
-if (ProgramOverride.getAmount()) {
+if (OverrideProgram.getAmount()) {
   console.log("OVERRIDE");
 }
