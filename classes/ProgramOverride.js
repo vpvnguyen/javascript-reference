@@ -6,34 +6,33 @@
  * */
 
 class ProgramOverride {
-  allProgramOverrideOptions = {
-    default: {},
-    custom1: {
-      name: "custom1",
-      description: "custom1",
-    },
-    custom2: {
-      name: "custom2",
-      amount: "$9001",
-    },
+  defaultOptions = {
+    name: null,
+    description: null,
+    message: null,
+    amount: null,
   };
 
-  getOverrideOptions = (programOverrideKey) => {
-    if (this.allProgramOverrideOptions.hasOwnProperty(programOverrideKey)) {
-      return this.allProgramOverrideOptions[programOverrideKey];
+  getOverrideOptions = (allProgramOverrideOptions, programOverrideKey) => {
+    if (allProgramOverrideOptions.hasOwnProperty(programOverrideKey)) {
+      return {
+        ...this.defaultOptions,
+        ...allProgramOverrideOptions[programOverrideKey],
+      };
     }
-    return this.allProgramOverrideOptions.default;
+    return this.defaultOptions;
   };
 
-  constructor(programOverrideKey) {
+  constructor(allProgramOverrideOptions, programOverrideKey) {
     try {
       const programOverrideOptions = this.getOverrideOptions(
+        allProgramOverrideOptions,
         programOverrideKey
       );
-      this.name = programOverrideOptions.name || null;
-      this.description = programOverrideOptions.description || null;
-      this.message = programOverrideOptions.message || null;
-      this.amount = programOverrideOptions.amount || null;
+      this.name = programOverrideOptions.name;
+      this.description = programOverrideOptions.description;
+      this.message = programOverrideOptions.message;
+      this.amount = programOverrideOptions.amount;
     } catch (error) {
       console.warn("ProgramOverride constructor error:", error);
     }
@@ -53,7 +52,22 @@ class ProgramOverride {
  * Use property if it exists
  * */
 
-const OverrideProgram = new ProgramOverride("custom1");
+const allProgramOverrideOptions = {
+  option1: {
+    name: "option1",
+    description: "option1 description",
+  },
+  option2: {
+    name: "option2",
+    message: "option2 message",
+    amount: "option2 $9001",
+  },
+};
+
+const OverrideProgram = new ProgramOverride(
+  allProgramOverrideOptions,
+  "option1"
+);
 
 console.log(
   `
