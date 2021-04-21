@@ -1,8 +1,8 @@
 /* *
- * ConstructProgramOverride
+ * Program Override Class
  *
- * Define program override options within class constant
- * Construct program override options based on given key
+ * Set non-override options by initializing default options to null
+ * Construct program override options based on given override object and property key
  * */
 
 class ProgramOverride {
@@ -48,8 +48,8 @@ class ProgramOverride {
 }
 
 /* *
- * Instantiate instance of program overrides
- * Use property if it exists
+ * Instantiate a new instance of program overrides
+ * Use override property if it exists
  * */
 
 const allProgramOverrideOptions = {
