@@ -5,21 +5,33 @@
  * Construct program override options based on given override object and property key
  * */
 
+interface IDefaultOptions {
+  name: string | null;
+  description?: string | null;
+  message?: string | null;
+  amount?: string | null;
+}
+
+interface IAllProgramOverrideOptions {
+  option1: IDefaultOptions;
+  option2: IDefaultOptions;
+}
+
 class ProgramOverrideTS {
-  private readonly defaultOptions = {
+  private readonly defaultOptions: IDefaultOptions = {
     name: null,
     description: null,
     message: null,
     amount: null,
   };
 
-  private name: string;
-  private description: string;
-  private message: string;
-  private amount: string;
+  private name: IDefaultOptions;
+  private description: IDefaultOptions;
+  private message: IDefaultOptions;
+  private amount: IDefaultOptions;
 
   private getOverrideOptions = (
-    allProgramOverrideOptions: object,
+    allProgramOverrideOptions: IAllProgramOverrideOptions,
     programOverrideKey: string
   ) => {
     if (allProgramOverrideOptions.hasOwnProperty(programOverrideKey)) {
@@ -31,7 +43,10 @@ class ProgramOverrideTS {
     return this.defaultOptions;
   };
 
-  constructor(allProgramOverrideOptions: object, programOverrideKey: string) {
+  constructor(
+    allProgramOverrideOptions: IAllProgramOverrideOptions,
+    programOverrideKey: string
+  ) {
     try {
       const programOverrideOptions = this.getOverrideOptions(
         allProgramOverrideOptions,
@@ -46,13 +61,13 @@ class ProgramOverrideTS {
     }
   }
 
-  public getName = () => this.name;
+  public getName = (): IDefaultOptions => this.name;
 
-  public getDescription = () => this.description;
+  public getDescription = (): IDefaultOptions => this.description;
 
-  public getMessage = () => this.message;
+  public getMessage = (): IDefaultOptions => this.message;
 
-  public getAmount = () => this.amount;
+  public getAmount = (): IDefaultOptions => this.amount;
 }
 
 /* *
@@ -60,7 +75,7 @@ class ProgramOverrideTS {
  * Use override property if it exists
  * */
 
-const allProgramOverrideOptionsTS = {
+const allProgramOverrideOptionsTS: IAllProgramOverrideOptions = {
   option1: {
     name: "option1",
     description: "option1 description",
