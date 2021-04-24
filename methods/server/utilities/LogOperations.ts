@@ -9,7 +9,7 @@ export default class LogOperations {
 
   constructor(operationName: string, array: any[], callback: any) {
     const input: any = [...array];
-    const result: any = callback(array);
+    const result: any = callback(array) || "undefined or null";
 
     this.logOperationsResponse = {
       operation: operationName,
