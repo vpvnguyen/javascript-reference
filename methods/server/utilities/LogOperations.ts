@@ -9,7 +9,8 @@ export default class LogOperations {
 
   constructor(operationName: string, array: any[], callback: any) {
     const input: any = [...array];
-    const result: any = callback(array) || "undefined or null";
+    let result: any = callback(array);
+    result = this.setIfValueIsUndefined(result);
 
     this.logOperationsResponse = {
       operation: operationName,
@@ -32,5 +33,10 @@ export default class LogOperations {
     });
 
     return false;
+  };
+
+  private setIfValueIsUndefined = (value: any) => {
+    if (typeof value === undefined) return "undefined";
+    return value;
   };
 }
