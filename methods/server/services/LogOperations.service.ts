@@ -1,4 +1,4 @@
-export default class LogOperations {
+export default class LogOperationsService {
   private readonly logOperationsResponse: {
     operation: string;
     arrayBefore: any[];
