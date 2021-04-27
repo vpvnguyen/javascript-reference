@@ -1,25 +1,41 @@
 import { Request, Response, NextFunction } from "express";
-import { ArrayMethodsModel } from "../models/index";
+import { ArrayMethodsService } from "../services";
 
-const arrayMethodExists = (arrayMethodsModel: any, arrayMethodName: any) => {
-  if (!arrayMethodsModel || !arrayMethodName) return false;
-  if (!arrayMethodsModel[arrayMethodName]) return false;
-  return true;
+const getMethodFromPath = (path: string) => {
+  const method = path.split("/")[1];
+  return method;
 };
 
-const storeArrayMethod = () => {};
+const getArrayMethodName = (methodFromPath: string) => {
+  const arrayMethodServiceKeys = Object.keys(ArrayMethodsService);
+
+  const filteredMethods = arrayMethodServiceKeys.filter(
+    (method: string) => method.toLowerCase() === methodFromPath.toLowerCase()
+  );
+
+  if (filteredMethods.length > 0) {
+    return filteredMethods[0];
+  }
+  return null;
+};
+
+const setArrayMethod = (arrayMethodName: any, arrayMethodsModel: any) =>
+  arrayMethodsModel[arrayMethodName];
 
 const identifyArrayMethod = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  console.log("identifyArrayMethod");
-  const arrayMethodName = Object.keys(ArrayMethodsModel);
+  const methodFromPath = getMethodFromPath(req.path);
 
-  console.log(arrayMethodName);
+  const arrayMethodName = getArrayMethodName(methodFromPath);
+
+  const arrayMethod = setArrayMethod(arrayMethodName, ArrayMethodsService);
+  res.locals.arrayMethod = arrayMethod;
+  console.log(res.locals.arrayMethod);
+
   next();
-  // if (!arrayMethodExists(ArrayMethodsModel, arrayMethodName)) throw new Error('identifyArrayMethod');
 };
 
 export default identifyArrayMethod;
