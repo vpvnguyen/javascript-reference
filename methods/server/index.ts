@@ -1,10 +1,10 @@
 import express, { Express, Request, Response } from "express";
-import { iterationsRoutes } from "./routes";
+import apiRouter from "./api";
 
 const app: Express = express();
 const PORT: number = 5000;
 
-app.use(iterationsRoutes.path, iterationsRoutes.router);
+app.use("/api", apiRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.json(`HOME`);
