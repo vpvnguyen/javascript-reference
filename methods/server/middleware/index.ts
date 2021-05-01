@@ -1,3 +1,3 @@
-import identifyArrayMethod from "./IdentifyArrayMethod.middleware";
+import identifyArrayMethodParams from "./identifyArrayMethodParams.middleware";
 
-export { identifyArrayMethod };
+export { identifyArrayMethodParams };
